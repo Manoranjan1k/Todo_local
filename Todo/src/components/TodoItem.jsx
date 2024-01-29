@@ -3,22 +3,21 @@ import { useState } from 'react';
 import { useTodo } from "../contexts";
 
 
-// eslint-disable-next-line react/prop-types
 function TodoItem({ todo }) {
-  const [isTodoEditable, setIsTodoEditable] = useState(false)
-  // eslint-disable-next-line react/prop-types
-  const [todoMsg, setTodoMsg] = useState(todo.todo)
-  const {updateTodo, deleteTodo, toggleComplete} = useTodo()
 
-  const editTodo = () => {
-    updateTodo(todo.id, {...todo, todo: todoMsg})
-    setIsTodoEditable(false)
-  }
-  const toggleCompleted = () => {
-    //console.log(todo.id);
-    toggleComplete(todo.id)
-  }
+   const [isTodoEditable, setIsTodoEditable] = useState(false);
+   const [todoMsg, setTodoMsg] = useState(todo.todo);
+   const {updatedTodo, deleteTodo, toggleCompleted} = useTodo()
 
+   const editTodo = () => {
+    updatedTodo(todo.id, {...todo, todo: todoMsg})
+    setIsTodoEditable(false)    
+   }
+
+   const toggleComplete = () => {
+    // console.log(todo.id);
+    toggleCompleted(todo.id)
+   }
   return (
       <div
           className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black ${
@@ -29,7 +28,7 @@ function TodoItem({ todo }) {
               type="checkbox"
               className="cursor-pointer"
               checked={todo.completed}
-              onChange={toggleCompleted}
+              onChange={toggleComplete}
           />
           <input
               type="text"
